@@ -1,0 +1,80 @@
+package com.ylch.ylcy.ylcy.home.controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ylch.ylcy.ylcy.common.entitys.RsgContent;
+import com.ylch.ylcy.ylcy.home.entitys.News;
+import com.ylch.ylcy.ylcy.home.service.NewsService;
+
+/**
+ * <p>
+ * Title: NewsController
+ * </p>
+ * <p>
+ * Description: 新闻模块控制器
+ * </p>
+ * 
+ * @author AntChenxi
+ * @date 2018年5月29日
+ */
+@RestController
+public class NewsController {
+
+	@Autowired
+	private NewsService service;
+
+	/**
+	 * 获得新闻列表
+	 * 
+	 * @param request
+	 *            http请求
+	 * @return
+	 */
+	@RequestMapping("/getSimpleNewsList")
+	public Map<String, Object> getNewsByCount(HttpServletRequest request, @RequestBody RsgContent rsgContent) {
+		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> newsList = new HashMap<>();
+		List<News> list = null;
+		list = service.getNewsByCount(rsgContent.getPageIndex(), rsgContent.getPageSize());
+		newsList.put("newsList", list);
+		map.put("data", newsList);
+		map.put("resultCode", "1");
+		map.put("resultMessage", "");
+		return map;
+	}
+
+	/**
+	 * 根据新闻ID获取新闻全部内容
+	 * 
+	 * @param request
+	 * @return News对象
+	 */
+	@RequestMapping("/getFullNew")
+	public Map<String, Object> getFullById(HttpServletRequest request, @RequestBody RsgContent rsgContent) {
+		Map<String, Object> map = new HashMap<>();
+		News news = null;
+		String sid = rsgContent.getNews_id();
+		if (sid == null || sid.equals("0") || sid == "") {
+			map.put("data", null);
+			map.put("resultCode", -1);
+			map.put("resultMessage", "传入ID不能为空或零!!");
+		} else {
+			int id = Integer.parseInt(sid);
+			news = service.getFullById(id);
+			map.put("data", news);
+			map.put("resultCode", "1");
+			map.put("resultMessage", "");
+		}
+		return map;
+	}
+
+}

@@ -1,0 +1,13 @@
+package com.ylch.ylcy.ylcy.shops.utils;
+
+public class JFConstant
+{
+  public static String JF_JHU = "1";
+  public static String JF_JHD = "0";
+
+  public static String JF_HUANKUAN = "1";
+  public static String JF_DUIHUAN = "2";
+
+  public static String DATA_JJUD = "100";
+  public static String DATA_JFBD = "101";
+}

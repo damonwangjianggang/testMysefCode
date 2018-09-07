@@ -1,0 +1,45 @@
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body style="text-align: center">
+
+	<h3>根据index pageSize 获取新闻</h3>
+	<form action="/ylcy/getSimpleNewsList" method="post" name="test1">
+		<input type="text" name="pageIndex">
+		<input type="text" name="pageSize"> <input type="submit"
+			value="提交">
+	</form>
+	<hr width="20%">
+
+	<h3>根据ID获取新闻所有内容</h3>
+	<form action="/ylcy/getFullNew" method="post" name="test2">
+		<input type="text" name="news_id"> <input type="submit"
+			value="提交">
+	</form>
+	<hr width="20%">
+
+	<h3>跳转到新闻上传页</h3>
+	<a href="/ylcy/getNewsUploadPage">新闻上传页</a>
+	<hr width="20%">
+
+	<h3>显示新闻</h3>
+	<form action="/ylcy/showNewsById" method="post" name="test3">
+		<input type="text" name="news_id"> <input type="submit"
+			value="提交">
+	</form>
+	<hr width="20%">
+	
+	<h3>跳转到商品上传页</h3>
+	<a href="/ylcy/goodImgUpload">商品上传页</a>
+	<hr width="20%">
+
+	<h3>显示商品</h3>
+	<form action="/ylcy/showGoods" method="post" name="test3">
+		<input type="text" name="com_id"> <input type="submit"
+			value="提交">
+	</form>
+	<hr width="20%">
+
+</body>
+</html>

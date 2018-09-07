@@ -1,0 +1,40 @@
+package com.ylch.ylcy.ylcy.common.entitys;
+
+/**
+ * 用于接收app端返回的各种数据
+ * @author 12557
+ *
+ */
+public class RsgContent {
+
+	private int pageIndex;//页码
+	private int pageSize;//每页大小
+	
+	private String news_id;//新闻ID
+	private String com_id;//商品ID
+	
+	public String getCom_id() {
+		return com_id;
+	}
+	public void setCom_id(String com_id) {
+		this.com_id = com_id;
+	}
+	public String getNews_id() {
+		return news_id;
+	}
+	public void setNews_id(String news_id) {
+		this.news_id = news_id;
+	}
+	public int getPageIndex() {
+		return pageIndex;
+	}
+	public void setPageIndex(int pageIndex) {
+		this.pageIndex = pageIndex;
+	}
+	public int getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}	
+}

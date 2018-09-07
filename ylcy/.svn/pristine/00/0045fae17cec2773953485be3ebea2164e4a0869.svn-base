@@ -1,0 +1,74 @@
+package com.ylch.ylcy.ylcy.shops.serviceImpl;
+
+import com.ylch.ylcy.ylcy.common.entitys.PageBean;
+import com.ylch.ylcy.ylcy.common.entitys.RsgContent;
+import com.ylch.ylcy.ylcy.shops.dao.DaoUtils;
+import com.ylch.ylcy.ylcy.shops.dao.JFGoodsDao;
+import com.ylch.ylcy.ylcy.shops.entitys.DataBean;
+import com.ylch.ylcy.ylcy.shops.entitys.Goods;
+import com.ylch.ylcy.ylcy.shops.entitys.JFRecords;
+import com.ylch.ylcy.ylcy.shops.service.JFGoodsService;
+import com.ylch.ylcy.ylcy.shops.utils.JFConstant;
+import com.ylch.ylcy.ylcy.user.dao.UserDao;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class JFGoodsServiceImpl implements JFGoodsService {
+
+	@Autowired
+	private JFGoodsDao jfGoodsDao;
+	
+	@Autowired
+	private UserDao userDao;
+
+	@Autowired
+	private DaoUtils dUtils;
+
+	/**
+	 * 查询商品带分页
+	 */
+	public List<Goods> selectGoodsPage(RsgContent rsgContent) {
+		PageBean pageBean = new PageBean();
+		int pageIndex = rsgContent.getPageIndex();
+		int pageSize = rsgContent.getPageSize();
+		if (pageIndex == 1)
+			pageBean.setBegin(0);
+		else {
+			pageBean.setBegin((pageIndex - 1) * pageSize + 1);
+		}
+		pageBean.setEachPageSize(pageSize);
+		return jfGoodsDao.selectGoodsPage(pageBean);
+	}
+
+	/**
+	 * 查询商品
+	 */
+	public List<Goods> selectGoods() {
+		return jfGoodsDao.selectGoods();
+	}
+
+	/**
+	 * 根据id值查询商品
+	 */
+	public Goods selectGoodById(RsgContent rsgContent) {
+		return jfGoodsDao.selectGoodById(rsgContent);
+	}
+
+	/**
+	 * 保存商品
+	 */
+	public void saveGoods(Goods goods) {
+		jfGoodsDao.saveGoods(goods);
+	}
+
+	/**
+	 * 兑换商品
+	 */
+	public void buyGood(RsgContent rsgContent) {
+		//获取商品详情
+		Goods goods = jfGoodsDao.selectGoodById(rsgContent);
+	}
+}

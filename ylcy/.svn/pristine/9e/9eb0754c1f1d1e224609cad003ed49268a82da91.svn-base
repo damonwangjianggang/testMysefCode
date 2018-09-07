@@ -1,0 +1,36 @@
+package com.ylch.ylcy.ylcy.shops.serviceImpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ylch.ylcy.ylcy.common.entitys.RsgContent;
+import com.ylch.ylcy.ylcy.shops.dao.JFGoodsServerDao;
+import com.ylch.ylcy.ylcy.shops.entitys.Goods;
+import com.ylch.ylcy.ylcy.shops.service.JFGoodsServerService;
+import com.ylch.ylcy.ylcy.shops.service.JFGoodsService;
+
+@Service
+public class JFGoodsServerServiceImpl implements JFGoodsServerService {
+
+	@Autowired
+	private JFGoodsServerDao jfGoodsServerDao;
+	
+	@Autowired
+	private JFGoodsService jfService;
+	
+	/**
+	 * 保存商品
+	 */
+	public void saveGoods(Goods goods) {
+		jfGoodsServerDao.saveGoods(goods);
+	}
+	
+	/**
+	 * 展示商品
+	 */
+	public Goods showGoods(int com_id) {
+		RsgContent rsgContent = new RsgContent();
+		rsgContent.setCom_id(com_id);
+		return jfService.selectGoodById(rsgContent);
+	}
+}

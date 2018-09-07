@@ -1,0 +1,102 @@
+package com.ylch.ylcy.ylcy.user.entity;
+
+import java.io.Serializable;
+
+public class OriginalOrderEntity implements Serializable {
+	public String getID() {
+		return ID;
+	}
+	public void setID(String iD) {
+		ID = iD;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	private String ID;//原始订单ID
+	private String userid;//用户ID
+	private String ahkrkhm;//客户姓名
+	private String afqxh;// 期数
+	private String dskrq;//实际还款日期
+	private String fje;//本金
+	private String flx;//利息
+	private String azt;//状态  3表示结束  1表示生效  0表示未生效 
+	private String acpfamc;//产品名称
+	private String dfkrq;// 放款日期
+	private String asqbh;//申请编号
+	private String dzzrq;//理应还款日
+	
+	
+	public String getDzzrq() {
+		return dzzrq;
+	}
+	public void setDzzrq(String dzzrq) {
+		this.dzzrq = dzzrq;
+	}
+	public String getDfkrq() {
+		return dfkrq;
+	}
+	public void setDfkrq(String dfkrq) {
+		this.dfkrq = dfkrq;
+	}
+	public String getAsqbh() {
+		return asqbh;
+	}
+	public void setAsqbh(String asqbh) {
+		this.asqbh = asqbh;
+	}
+	public String getAcpfamc() {
+		return acpfamc;
+	}
+	public void setAcpfamc(String acpfamc) {
+		this.acpfamc = acpfamc;
+	}
+	public String getAhkrkhm() {
+		return ahkrkhm;
+	}
+	public void setAhkrkhm(String ahkrkhm) {
+		this.ahkrkhm = ahkrkhm;
+	}
+	public String getAfqxh() {
+		return afqxh;
+	}
+	public void setAfqxh(String afqxh) {
+		this.afqxh = afqxh;
+	}
+
+	public String getFje() {
+		return fje;
+	}
+	public void setFje(String fje) {
+		this.fje = fje;
+	}
+	public String getFlx() {
+		return flx;
+	}
+	public void setFlx(String flx) {
+		this.flx = flx;
+	}
+	public String getDskrq() {
+		return dskrq;
+	}
+	public void setDskrq(String dskrq) {
+		this.dskrq = dskrq;
+	}
+	public String getAzt() {
+		return azt;
+	}
+	public void setAzt(String azt) {
+		this.azt = azt;
+	}
+	@Override
+	public String toString() {
+		return "OriginalOrderEntity [ID=" + ID + ", userid=" + userid + ", ahkrkhm=" + ahkrkhm + ", afqxh=" + afqxh
+				+ ", dskrq=" + dskrq + ", fje=" + fje + ", flx=" + flx + ", azt=" + azt + ", acpfamc=" + acpfamc + "]";
+	}
+
+	
+
+
+}

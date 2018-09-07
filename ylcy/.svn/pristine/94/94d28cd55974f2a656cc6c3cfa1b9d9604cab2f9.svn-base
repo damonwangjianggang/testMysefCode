@@ -1,0 +1,69 @@
+package com.ylch.ylcy.ylcy.shops.dao;
+
+import com.ylch.ylcy.ylcy.common.entitys.PageBean;
+import com.ylch.ylcy.ylcy.common.entitys.RsgContent;
+import com.ylch.ylcy.ylcy.shops.entitys.Goods;
+import com.ylch.ylcy.ylcy.shops.entitys.JFRecords;
+import java.util.List;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+
+@Mapper
+public abstract interface JFGoodsDao {
+	/**
+	 * 查询商品带分页
+	 * @param paramPageBean
+	 * @return
+	 */
+	@Select({ "SELECT * FROM commodity limit #{begin},#{eachPageSize}" })
+	@Results({ @Result(property = "com_id", column = "com_id"), @Result(property = "com_name", column = "com_name"),
+			@Result(property = "com_price", column = "com_price"),
+			@Result(property = "com_imgurl", column = "com_imgurl"),
+			@Result(property = "com_detail", column = "com_detail"), @Result(property = "com_jf", column = "com_jf") })
+	public List<Goods> selectGoodsPage(PageBean pageBean);
+
+	/**
+	 * 查询商品
+	 * @return
+	 */
+	@Select({ "SELECT * FROM commodity" })
+	@Results({ @Result(property = "com_id", column = "com_id"), @Result(property = "com_name", column = "com_name"),
+			@Result(property = "com_price", column = "com_price"),
+			@Result(property = "com_imgurl", column = "com_imgurl"),
+			@Result(property = "com_detail", column = "com_detail"), @Result(property = "com_jf", column = "com_jf") })
+	public List<Goods> selectGoods();
+
+	/**
+	 * 查询商品详情信息
+	 * @param paramRsgContent
+	 * @return
+	 */
+	@Select({ "SELECT * FROM commodity where com_id=#{com_id}" })
+	@Results({ @Result(property = "com_id", column = "com_id"), @Result(property = "com_name", column = "com_name"),
+			@Result(property = "com_price", column = "com_price"),
+			@Result(property = "com_imgurl", column = "com_imgurl"),
+			@Result(property = "com_detail", column = "com_detail"), @Result(property = "com_jf", column = "com_jf") })
+	public Goods selectGoodById(RsgContent rsgContent);
+
+	/**
+	 * 查询积分记录
+	 * @return
+	 */
+	@Select({ "SELECT * FROM point_record WHERE REASON='2'" })
+	@Results({ @Result(property = "userid", column = "userid"), @Result(property = "record_id", column = "record_id"),
+			@Result(property = "type", column = "type"), 
+			@Result(property = "time", column = "time"),
+			@Result(property = "reason", column = "resaon") })
+	public List<JFRecords> selectJFRecords();
+
+	/**
+	 * 保存商品信息
+	 * @param paramGoods
+	 */
+	@Insert({
+			"INSERT INTO commodity(com_name,com_price,com_imgurl,com_detail,com_jf) VALUES(#{com_name},#{com_price},#{com_imgurl},#{com_detail},#{com_jf})" })
+	public void saveGoods(Goods goods);
+}

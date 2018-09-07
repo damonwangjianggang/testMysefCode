@@ -1,0 +1,96 @@
+package com.ylch.ylcy.ylcy.shops.controller;
+
+import com.ylch.ylcy.ylcy.common.entitys.RsgContent;
+import com.ylch.ylcy.ylcy.shops.entitys.Goods;
+import com.ylch.ylcy.ylcy.shops.service.JFGoodsService;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@SuppressWarnings("all")
+public class JFGoodsGontroller {
+
+	@Autowired
+	private JFGoodsService jfService;
+
+	/**
+	 * 商品首页
+	 * 
+	 * @param request
+	 * @param rsgContent
+	 * @return
+	 */
+	@RequestMapping({ "/integralMall" })
+	@RequiresAuthentication
+	public HashMap integralMall(HttpServletRequest request, @RequestBody RsgContent rsgContent) {
+		String resultCode = "1";
+		String resultMessage = "";
+		Map data = new HashMap();
+
+		List listGoods = jfService.selectGoodsPage(rsgContent);
+		data.put("listGoods", listGoods);
+
+		HashMap hmp = new HashMap();
+		hmp.put("resultCode", resultCode);
+		hmp.put("resultMessage", resultMessage);
+		hmp.put("data", data);
+		return hmp;
+	}
+
+	/**
+	 * 商品详情
+	 * 
+	 * @param request
+	 * @param rsgContent
+	 * @return
+	 */
+	@RequestMapping({ "/goodDetail" })
+	@RequiresAuthentication
+	public HashMap goodDetail(HttpServletRequest request, @RequestBody RsgContent rsgContent) {
+		String resultCode = "1";
+		String resultMessage = "";
+		Map data = new HashMap();
+
+		Goods good = jfService.selectGoodById(rsgContent);
+
+		data.put("good", good);
+		data.put("exchangeStatue", Boolean.valueOf(true));
+
+		HashMap hmp = new HashMap();
+		hmp.put("resultCode", resultCode);
+		hmp.put("resultMessage", resultMessage);
+		hmp.put("data", data);
+		return hmp;
+	}
+
+	/**
+	 * 兑换商品
+	 * 
+	 * @param rsgContent
+	 * @return
+	 */
+	@RequestMapping({ "/buyGood" })
+	@RequiresAuthentication
+	public HashMap buyGood(@RequestBody RsgContent rsgContent) {
+		String resultCode = "1";
+		String resultMessage = "";
+		Map data = new HashMap();
+
+		
+		jfService.buyGood(rsgContent);
+
+		HashMap hmp = new HashMap();
+		hmp.put("resultCode", resultCode);
+		hmp.put("resultMessage", resultMessage);
+		hmp.put("data", data);
+		return hmp;
+	}
+}

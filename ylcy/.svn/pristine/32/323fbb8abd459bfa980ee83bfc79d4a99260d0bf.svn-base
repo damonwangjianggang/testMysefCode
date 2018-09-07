@@ -1,0 +1,48 @@
+package com.ylch.ylcy.ylcy.shops.controller;
+
+import com.ylch.ylcy.ylcy.shops.entitys.Goods;
+import com.ylch.ylcy.ylcy.shops.service.JFGoodsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class JFToUpload {
+
+	@Autowired
+	private JFGoodsService jfService;
+
+	/**
+	 * 商品图片上传
+	 * 
+	 * @return
+	 */
+	@RequestMapping({ "/goodImgUpload" })
+	public String imgUpload() {
+		return "pro_update";
+	}
+
+	/**
+	 * 保存商品信息
+	 * 
+	 * @param goods
+	 * @return
+	 */
+	@RequestMapping({ "/saveGoods" })
+	public String saveGoods(Goods goods) {
+		jfService.saveGoods(goods);
+		return "pro_update";
+	}
+
+	/**
+	 * 展示商品列表
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping({ "/showGoods" })
+	public String showGoods(Model model) {
+		return "showgoods";
+	}
+}

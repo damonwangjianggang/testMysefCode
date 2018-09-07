@@ -1,0 +1,38 @@
+package com.ylch.ylcy.ylcy.user.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ylch.ylcy.ylcy.user.dao.IntegralDao;
+import com.ylch.ylcy.ylcy.user.entity.IntegralDetailEntity;
+import com.ylch.ylcy.ylcy.user.entity.IntegralEntity;
+import com.ylch.ylcy.ylcy.user.entity.PointRecordEntity;
+import com.ylch.ylcy.ylcy.user.service.IntegralService;
+
+@Service
+public class IntegralServiceImpl implements IntegralService {
+
+	@Autowired
+	private IntegralDao integralDao;
+	@Override
+	public IntegralEntity getIntegralByUserid(String userid) {
+		return integralDao.getIntegralByUserid(userid);
+	}
+	@Override
+	public List<PointRecordEntity> getIntegralRecordDetailByUserid(String userid) {
+		return integralDao.getIntegralRecordDetailByUserid(userid);
+	}
+	@Override
+	public void insertOrUpdateIntegral(String userid, String totalIntegral) {
+		int useidIndex = integralDao.getUserIdFromPointRecord(userid);
+		if(useidIndex>0) {
+			integralDao.updateUserTotailIntegral(userid,totalIntegral);
+		}else {
+			integralDao.insertUserTotailIntegral(userid,totalIntegral);
+		}
+		
+	}
+
+}
